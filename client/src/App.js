@@ -11,7 +11,16 @@ import {
   ApolloProvider,
   createHttpLink,
 } from '@apollo/client';
+
+
 import { setContext } from '@apollo/client/link/context';
+import SearchBooks from './pages/SearchBooks';
+import SavedBooks from './pages/SavedBooks';
+import Navbar from './components/Navbar';
+
+const httplink = createHttpLink({
+  uri: '/graphQl',
+});
 
 
 const authLink = setContext((_, { headers }) => {
@@ -32,6 +41,7 @@ const client = new ApolloClient({
 
 function App() {
   return (
+    <ApolloProvider client={client}>
     <Router>
       <>
         <Navbar />
@@ -42,6 +52,7 @@ function App() {
         </Switch>
       </>
     </Router>
+    </ApolloProvider>
   );
 }
 
